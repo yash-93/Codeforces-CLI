@@ -40,4 +40,13 @@ program
     fetchQuestion(problemsData[chosenProblemIndex].url);
   });
 
+program
+  .command("getproblem <cid> <pb>")
+  .alias("gp")
+  .description("Get problem using problem id")
+  .action(async (id,pb) => {
+    let url = "/problemset/problem/" + id + "/" + pb;
+    fetchQuestion(url);
+  });
+
 program.parse(process.argv);
