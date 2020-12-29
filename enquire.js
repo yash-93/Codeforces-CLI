@@ -30,4 +30,34 @@ module.exports = {
     ];
     return inquirer.prompt(questions);
   },
+  chooseTags: async (tags) => {
+    const questions = [
+      {
+        type: "checkbox",
+        name: "tags",
+        message: "Select Tags",
+        choices: tags,
+      },
+    ];
+    let res = [];
+    await inquirer.prompt(questions).then((answers) => {
+      res = answers.tags;
+    });
+    return res;
+  },
+  chooseProblem: async (problems) => {
+    const questions = [
+      {
+        type: "list",
+        name: "problems",
+        message: "Choose a problem to view",
+        choices: problems,
+      },
+    ];
+    let chosenProblem = "";
+    await inquirer.prompt(questions).then((answers) => {
+      chosenProblem = answers.problems;
+    });
+    return chosenProblem;
+  },
 };
