@@ -4,7 +4,7 @@ const Configstore = require("configstore");
 const Spinner = CLI.Spinner;
 
 const pkg = require("./package.json");
-const inquirer = require("./inquirer");
+const inquirer = require("./enquire");
 
 const conf = new Configstore(pkg.name);
 
