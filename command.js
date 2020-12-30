@@ -5,6 +5,8 @@ const { getTags } = require("./getTags");
 const { getProblems } = require("./getProblems");
 const { chooseProblem } = require("./enquire");
 const { fetchQuestion } = require("./fetchQuestion");
+const { submit } = require("./submit");
+const { showVerdict } = require("./getVerdict");
 
 program.version("1.0.0").description("CF CLI");
 
@@ -43,10 +45,21 @@ program
 program
   .command("getproblem <cid> <pb>")
   .alias("gp")
-  .description("Get problem using problem id")
-  .action(async (id,pb) => {
-    let url = "/problemset/problem/" + id + "/" + pb;
+  .description("Get problem - enter contest id and problem alphabet")
+  .action(async (cid, pb) => {
+    let url = "/problemset/problem/" + cid + "/" + pb;
     fetchQuestion(url);
+  });
+
+program
+  .command("submit <pid> <pathtofile>")
+  .alias("sb")
+  .description(
+    "Submit your code - enter problem id and path to your source code"
+  )
+  .action(async (pid, pathtofile) => {
+    await submit(pid, pathtofile);
+    await showVerdict();
   });
 
 program.parse(process.argv);
